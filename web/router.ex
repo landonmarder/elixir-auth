@@ -15,6 +15,7 @@ defmodule Fishbowl.Router do
 
   scope "/", Fishbowl do
     pipe_through :browser # Use the default browser stack
+    resources "/registrations", RegistrationController, only: [:new, :create]
 
     get "/", PageController, :index
   end
