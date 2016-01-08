@@ -20,7 +20,6 @@ defmodule Fishbowl.SessionController do
         |> put_flash(:error, 'Could not find a user with that email.')
         |> render("new.html", changeset: User.changeset(%User{}))
     else
-      IEx.pry
       cond do
         Comeonin.Bcrypt.checkpw(user_params["password"], user.encrypted_password) ->
           conn
