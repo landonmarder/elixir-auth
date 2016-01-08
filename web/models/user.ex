@@ -25,6 +25,7 @@ defmodule Fishbowl.User do
     |> cast(params, @required_fields, @optional_fields)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
+    |> update_change(:email, &String.downcase/1)
     |> validate_length(:password, min: 6)
     |> validate_length(:password_confirmation, min: 6)
     |> validate_confirmation(:password)

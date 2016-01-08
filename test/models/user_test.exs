@@ -4,6 +4,8 @@ defmodule Fishbowl.UserTest do
   alias Fishbowl.User
 
   @valid_attrs %{email: "michaeljordan@test.com", password: "passw0rd", password_confirmation: "passw0rd", name: "Michael"}
+  @capitalized_email "MiCHAelJordan@test.com"
+  @valid_attrs_capital_email %{email: @capitalized_email, password: "passw0rd", password_confirmation: "passw0rd", name: "Michael"}
   @not_matching_passwords %{email: "michaeljordan@test.com", password: "passw0rd123", password_confirmation: "passw0rd", name: "Michael"}
   @not_valid_email %{email: "michaeljordan", password: "passw0rd", password_confirmation: "passw0rd", name: "Michael"}
   @no_name %{email: "michaeljordan@test.com", password: "passw0rd", password_confirmation: "passw0rd"}
@@ -26,5 +28,10 @@ defmodule Fishbowl.UserTest do
   test "changeset with invalid attributes - no name" do
     changeset = User.changeset(%User{}, @no_name)
     refute changeset.valid?
+  end
+
+  test "changeset will save emails as downcase" do
+    changeset = User.changeset(%User{}, @valid_attrs_capital_email)
+    assert changeset.changes.email == String.downcase(@capitalized_email)
   end
 end
