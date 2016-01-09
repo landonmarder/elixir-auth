@@ -2,7 +2,6 @@ defmodule Fishbowl.SessionController do
   use Fishbowl.Web, :controller
 
   plug :scrub_params, "user" when action in [:create]
-  plug :action
 
   def new(conn, _params) do
     render(conn, changeset: User.changeset(%User{}))

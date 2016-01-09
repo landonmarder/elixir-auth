@@ -14,7 +14,7 @@ defmodule Fishbowl.RegistrationController do
     changeset = User.changeset(%User{}, user_params)
 
     if changeset.valid? do
-      new_user = Password.generate_password_and_store_user(changeset)
+      {:ok, new_user} = Password.generate_password_and_store_user(changeset)
 
       conn
         |> put_flash(:info, "Successfully registered and logged in")
