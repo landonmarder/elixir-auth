@@ -7,6 +7,7 @@ defmodule Fishbowl.User do
     field :encrypted_password, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    has_many :user_groups, Fishbowl.UserGroup
 
     timestamps
   end

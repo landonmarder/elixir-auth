@@ -1,16 +1,15 @@
-defmodule Fishbowl.Group do
+defmodule Fishbowl.UserGroup do
   use Fishbowl.Web, :model
 
-  schema "groups" do
-    field :name, :string
-    field :code, :string
-    has_many :user_groups, Fishbowl.UserGroup
+  schema "user_groups" do
+    belongs_to :user, Fishbowl.User
+    belongs_to :group, Fishbowl.Group
 
     timestamps
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w(code)
+  @required_fields ~w(user_id group_id)
+  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
